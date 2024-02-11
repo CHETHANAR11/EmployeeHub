@@ -47,7 +47,9 @@ const add_details = () => {
         setJoiningDate("");
         setDesignation("");
       }).catch((error)=>{
-        Alert.alert("Registration failed","An error occured during registration");
+        Alert.alert("Registration failed",
+        "An error occured during registration"
+        );
         console.log("registration failed",error)
       });
   };

@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cors = require("cors");
+const cors = require('cors');
 
 const app = express(); //instance of express
 const port = 8000;
@@ -59,21 +59,21 @@ app.post("/addEmployee", async (req, res) => {
     });
     await newEmployee.save();
 
-    res,status(201).json({message:"Employee ave succesfully",employee:newEmployee})
+    res.status(201).json({message:"Employee save succesfully",employee:newEmployee})
   } catch (error) {
     console.log("Error creating employee", error);
-    res.status(500).json({ message: "Failer to add an employee" });
+    res.status(500).json({ message: "Failed to add an employee" });
   }
 });
 
 
 
 //fetch all employee
-app.get("employees",async(req,res)=>{
+app.get("/employees",async(req,res)=>{
     try{
         const employees = await Employee.find();
         res.status(200).json(employees);
     }catch(error){
         res.status(500).json({message:"Failed to retrieve the employee"})
     }
-})
+});
