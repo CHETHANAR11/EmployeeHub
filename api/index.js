@@ -61,7 +61,7 @@ app.post("/addEmployee", async (req, res) => {
 
     res,status(201).json({message:"Employee ave succesfully",employee:newEmployee})
   } catch (error) {
-    console.log("Error creatig employee", error);
+    console.log("Error creating employee", error);
     res.status(500).json({ message: "Failer to add an employee" });
   }
 });
