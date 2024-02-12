@@ -32,7 +32,7 @@ const add_details = () => {
       address: address,
     };
     axios
-      .post("http://localhost:8000/addEmployee", employeeData)
+      .post("http://10.0.2.2:8000/addEmployee", employeeData)
       .then((response) => {
         Alert.alert(
           "Registration Successfull",
