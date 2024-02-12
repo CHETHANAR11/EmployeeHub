@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
-
+import { useRouter } from "expo-router";
 const markattendance = () => {
+  const router = useRouter();
   const [currentDate, setCurrentDate] = useState(moment());
   const goToNextDay = () => {
     const nextDate = moment(currentDate).add(1, "days");
@@ -75,7 +76,21 @@ const markattendance = () => {
         </View>
         <View style={{ marginHorizontal: 12 }}>
           {employees.map((item, index) => (
-            <Pressable>
+            <Pressable
+              onPress={() =>
+                router.push({
+                  pathname: "/user",
+                  params: {
+                    name: item.employeeName,
+                    id: item.employeeId,
+                    salary: item?.salary,
+                    designation: item?.designation,
+                  },
+                })
+              }
+              key={index}
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
               <View
                 style={{
                   width: 50,
@@ -90,6 +105,14 @@ const markattendance = () => {
               >
                 <Text style={{ color: "white", fontSize: 16 }}>
                   {item?.employeeName?.charAt(0)}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                  {item?.employeeName}
+                </Text>
+                <Text style={{ marginTop: 5, color: "gray" }}>
+                  {item?.designation}({item?.employeeId})
                 </Text>
               </View>
             </Pressable>
