@@ -9,10 +9,10 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import {useRouter} from 'expo-router';
+import { useRouter } from "expo-router";
 
 const index = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <ScrollView>
       <LinearGradient colors={["#757FD5", "#E9E4F0"]} style={{ flex: 1 }}>
@@ -40,7 +40,7 @@ const index = () => {
             }}
           >
             <Pressable
-            onPress={()=> router.push("/home/employees")}
+              onPress={() => router.push("/home/employees")}
               style={{
                 backgroundColor: "#D3CCE3",
                 padding: 12,
@@ -67,6 +67,7 @@ const index = () => {
               </Text>
             </Pressable>
             <Pressable
+              onPress={() => router.push("/home/markattendance")}
               style={{
                 backgroundColor: "#D3CCE3",
                 padding: 12,
@@ -297,7 +298,7 @@ const index = () => {
                 backgroundColor: "#f79d00",
                 borderRadius: 6,
                 padding: 12,
-                flex:1,
+                flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -317,7 +318,7 @@ const index = () => {
                   color="black"
                 />
               </View>
-              <Text style={{marginTop:7}}>Attendance Criteria</Text>
+              <Text style={{ marginTop: 7 }}>Attendance Criteria</Text>
             </View>
             <View
               style={{
@@ -326,7 +327,7 @@ const index = () => {
                 padding: 12,
                 alignItems: "center",
                 justifyContent: "center",
-                flex:1
+                flex: 1,
               }}
             >
               <View
@@ -340,7 +341,7 @@ const index = () => {
               >
                 <Feather name="bar-chart" size={24} color="black" />
               </View>
-              <Text style={{marginTop:7}}>Increased workflow</Text>
+              <Text style={{ marginTop: 7 }}>Increased workflow</Text>
             </View>
           </View>
           <View
@@ -356,7 +357,7 @@ const index = () => {
                 backgroundColor: "#D3CCE3",
                 borderRadius: 6,
                 padding: 12,
-                flex:1,
+                flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -376,7 +377,7 @@ const index = () => {
                   color="black"
                 />
               </View>
-              <Text style={{marginTop:7}}>Cost Savings</Text>
+              <Text style={{ marginTop: 7 }}>Cost Savings</Text>
             </View>
             <View
               style={{
@@ -385,7 +386,7 @@ const index = () => {
                 padding: 12,
                 alignItems: "center",
                 justifyContent: "center",
-                flex:1
+                flex: 1,
               }}
             >
               <View
@@ -399,7 +400,7 @@ const index = () => {
               >
                 <Feather name="bar-chart" size={24} color="black" />
               </View>
-              <Text style={{marginTop:7}}>Employee Performance</Text>
+              <Text style={{ marginTop: 7 }}>Employee Performance</Text>
             </View>
           </View>
         </View>
