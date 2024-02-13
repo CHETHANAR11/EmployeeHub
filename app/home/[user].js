@@ -14,7 +14,7 @@ const user = () => {
   };
 
   const goToPrevDay = () => {
-    const nextDate = moment(currentDate).subrack(1, "days");
+    const nextDate = moment(currentDate).subtract(1, "days");
     setCurrentDate(nextDate);
   };
   const formatdate = (date) => {
@@ -139,7 +139,7 @@ const user = () => {
           }}
         >
           <Pressable
-            onPress={() => setAttendanceStatus("present")}
+            onPress={() => setAttendanceStatus("halfday")}
             style={{
               backgroundColor: "#C4E0E5",
               padding: 10,
@@ -158,7 +158,7 @@ const user = () => {
             <Text>Halfday</Text>
           </Pressable>
           <Pressable
-            onPress={() => setAttendanceStatus("absent")}
+            onPress={() => setAttendanceStatus("holiday")}
             style={{
               backgroundColor: "#C4E0E5",
               padding: 10,
@@ -176,6 +176,32 @@ const user = () => {
             <Text>Holiday</Text>
           </Pressable>
         </View>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <TextInput
+            style={{
+              borderRadius: 6,
+              marginTop: 10,
+              borderWidth: 2,
+              borderColor: "#E0E0E0",
+              padding: 10,
+              flex: 1,
+            }}
+            placeholderTextColor="black"
+            placeholder="Advance / Loans"
+          />
+          <TextInput
+            style={{
+              borderRadius: 6,
+              marginTop: 10,
+              borderWidth: 2,
+              borderColor: "#E0E0E0",
+              padding: 10,
+              flex: 1,
+            }}
+            placeholderTextColor="black"
+            placeholder="Extra Bonus"
+          />
+        </View>
       </View>
     </View>
   );
@@ -184,3 +210,17 @@ const user = () => {
 export default user;
 
 const styles = StyleSheet.create({});
+// import { StyleSheet, Text, View } from "react-native";
+// import React from "react";
+
+// const user = () => {
+//   return (
+//     <View>
+//       <Text>user</Text>
+//     </View>
+//   );
+// };
+
+// export default user;
+
+// const styles = StyleSheet.create({});
