@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { AntDesign } from "@expo/vector-icons";
+import DataTable from "react-native-paper";
 
 const summary = () => {
   const [attendanceData, setAttendanceData] = useState([]);
@@ -67,7 +68,9 @@ const summary = () => {
       <View style={{ marginHorizontal: 12 }}>
         {attendanceData?.map((index, index) => (
           <View key={index} style={{ marginVerticle: 10 }}>
-            <View style={{flexDirection:"row",alignItems:"center",gap:10}}>
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
               <View
                 style={{
                   width: 50,
@@ -94,7 +97,24 @@ const summary = () => {
               </View>
             </View>
 
-            
+            <View>
+              <DataTable>
+                <DataTable.Header>
+                  <DataTable.Title>P</DataTable.Title>
+                  <DataTable.Title>A</DataTable.Title>
+                  <DataTable.Title>HD</DataTable.Title>
+                  <DataTable.Title>H</DataTable.Title>
+                  <DataTable.Title>NW</DataTable.Title>
+                </DataTable.Header>
+                <DataTable.Row>
+                  <DataTable.Cell>{item?.present}</DataTable.Cell>
+                  <DataTable.Cell>{item?.absent}</DataTable.Cell>
+                  <DataTable.Cell>{item?.halfday}</DataTable.Cell>
+                  <DataTable.Cell>1</DataTable.Cell>
+                  <DataTable.Cell>8</DataTable.Cell>
+                </DataTable.Row>
+              </DataTable>
+            </View>
           </View>
         ))}
       </View>
