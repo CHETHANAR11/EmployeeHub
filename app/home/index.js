@@ -150,6 +150,7 @@ const index = () => {
               </View>
             </Pressable>
             <Pressable
+             onPress={() => router.push("/home/summary")}
               style={{
                 backgroundColor: "#BE93C5",
                 borderRadius: 6,

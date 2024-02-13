@@ -1,13 +1,22 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import moment from "moment";
 import { useLocalSearchParams } from "expo-router";
 import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
+import axios from "axios";
 
 const user = () => {
   const params = useLocalSearchParams();
   const [attendanceStatus, setAttendanceStatus] = useState("present");
   const [currentDate, setCurrentDate] = useState(moment());
+
   const goToNextDay = () => {
     const nextDate = moment(currentDate).add(1, "days");
     setCurrentDate(nextDate);
@@ -18,7 +27,42 @@ const user = () => {
     setCurrentDate(nextDate);
   };
   const formatdate = (date) => {
-    return date.format("MMMM,D,YYYY");
+    return date.format("MMMM D,YYYY");
+  };
+  const submitAttendance = async () => {
+    try {
+      const attendanceData = {
+        employeeId: params?.id,
+        employeeName: params?.name,
+        date: currentDate.format("MMMM D,YYYY"),
+        status: attendanceStatus,
+      };
+      const response = await axios.post(
+        "http://10.0.2.2:8000/attendance",
+        attendanceData
+      );
+      if (response.status === 200) {
+        Alert.alert(`Attendance sumitted successfully for ${params?.name}`);
+      }
+    } 
+    // catch (error) {
+    //   console.log("error submitting attendance", error.response.data);
+    // }
+    catch (error) {
+      // Check if there is a response object with detailed error information
+      if (error.response) {
+        console.log("Server responded with an error:", error.response.data);
+        Alert.alert("Error", `Server responded with an error: ${error.response.data.message}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log("No response received from the server:", error.request);
+        Alert.alert("Error", "No response received from the server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.log("Error setting up the request:", error.message);
+        Alert.alert("Error", "An unexpected error occurred. Please try again later.");
+      }
+    }
   };
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -53,7 +97,7 @@ const user = () => {
             backgroundColor: "#4b6cb7",
             alignItems: "center",
             justifyContent: "center",
-            marginLeft: 10,
+            // marginLeft: 10,
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>
@@ -69,14 +113,14 @@ const user = () => {
           </Text>
         </View>
       </Pressable>
-      <Text style={{ fontSize: 16, fontWeignt: "500", marginHorizontal: 12 }}>
+      <Text style={{ fontSize: 16, fontWeight: "500", marginHorizontal: 12 }}>
         Basic Pay:{params?.salary}
       </Text>
       <View style={{ marginHorizontal: 12 }}>
         <Text
           style={{
             fontSize: 16,
-            fontWeignt: "500",
+            fontWeight: "500",
             letterSpacing: 3,
             marginTop: 7,
             flex: 1,
@@ -120,6 +164,7 @@ const user = () => {
               flexDirection: "row",
               alignItems: "center",
               gap: 10,
+              flex: 1,
             }}
           >
             {attendanceStatus === "absent" ? (
@@ -166,6 +211,7 @@ const user = () => {
               flexDirection: "row",
               alignItems: "center",
               gap: 10,
+              flex: 1,
             }}
           >
             {attendanceStatus === "holiday" ? (
@@ -202,6 +248,24 @@ const user = () => {
             placeholder="Extra Bonus"
           />
         </View>
+        <Pressable
+          onPress={submitAttendance}
+          style={{
+            padding: 15,
+            backgroundColor: "#00c6ff",
+            width: 200,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 30,
+            borderRadius: 6,
+          }}
+        >
+          <Text
+            style={{ textAlign: "center", color: "white", fontWeight: "500" }}
+          >
+            Submit attendance
+          </Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -210,17 +274,3 @@ const user = () => {
 export default user;
 
 const styles = StyleSheet.create({});
-// import { StyleSheet, Text, View } from "react-native";
-// import React from "react";
-
-// const user = () => {
-//   return (
-//     <View>
-//       <Text>user</Text>
-//     </View>
-//   );
-// };
-
-// export default user;
-
-// const styles = StyleSheet.create({});

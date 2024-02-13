@@ -81,7 +81,7 @@ app.post("/attendance", async (req, res) => {
   try {
     const { employeeId, employeeName, date, status } = req.body;
 
-    const existingAttendance = await Attendence.findOne({ employeeId, date });
+    const existingAttendance = await Attendance.findOne({ employeeId, date });
 
     if (existingAttendance) {
       existingAttendance.status = status;
@@ -102,7 +102,7 @@ app.post("/attendance", async (req, res) => {
   }
 });
 
-app.get("/attendence", async (req, res) => {
+app.get("/attendance", async (req, res) => {
   try {
     const { date } = req.query;
     const attendanceData = await Attendance.find({ date: date });
